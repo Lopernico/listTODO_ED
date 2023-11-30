@@ -27,12 +27,10 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.*;
-import org.jdatepicker.impl.UtilDateModel;
+
 
 /**
- *
+ * !!en caso de error con librerias agregar jar -> jcalendar-1.4.jar a librerias
  * @author antho
  */
 public class TodoListGui extends JFrame {
