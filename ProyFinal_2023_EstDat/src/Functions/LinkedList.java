@@ -108,51 +108,65 @@ public class LinkedList {
       * @return tarea con la posicion correspondiente
       */
       public Task buscarPorPosicion(int posicion) {
-             Node temp ;
-         temp = head;
-for (int x = 0; x <= size; x++) {
-    if(temp.task.getPosicion()!=posicion){
-             temp= temp.getNext();
-                }else{
-                       return temp.task;
-                        }
-}
-        return null;
+          Node temp;
+          temp = head;
+          for (int x = 0; x <= size; x++) {
+              if (temp.task.getPosicion() != posicion) {
+                  temp = temp.getNext();
+              } else {
+                  return temp.task;
+              }
+          }
+          return null;
+    }
+      
+    public Task buscarPorPrioridad(int prioridad) {
+          Node temp;
+          temp = head;
+          for (int x = 0; x <= size; x++) {
+              if (temp.task.getPrioridad() != prioridad) {
+                  temp = temp.getNext();
+              } else {
+                  return temp.task;
+              }
+          }
+          return null;
     }
     
     /**
      * Método para mostrar la lista con todas las tareas que contiene
      */
     public String display() {
-        Node temp ;
-       String resultado ="->",tarea = "{";
+        Node temp;
+        String resultado = "->", tarea = "{";
         temp = head;
-        if(temp!=null){
-for (int x = 0; x <= size; x++) {
-    tarea+="titulo ";
-   tarea+=temp.task.getTitulo();
-   tarea+=". descripcion ";
-   tarea+=temp.task.getDescripcion();
-    tarea+=". fecha anadida a la lista ";
-   tarea+=temp.task.getAñadidaF().toString();
-    tarea+=". prioridad de la tarea ";
-  tarea+=temp.task.getPrioridad();
-   tarea+=". fecha vencimiento de la tarea ";
-   tarea+=temp.task.getVenceF().toString();
-    tarea+=". posicion en la lista ";
-  tarea+=temp.task.getPosicion();
-    
- resultado+=("tarea "+temp.task.getPosicion()+" posicion en lista= "+(x+1)+" : "+tarea+"}, ");
-    System.out.println(resultado);
- tarea= "{";
- if(temp.getNext()!=null){
-       temp=temp.getNext();} 
-} return resultado;
-        }else{
+        if (temp != null) {
+            for (int x = 0; x <= size; x++) {
+                tarea += "titulo ";
+                tarea += temp.task.getTitulo();
+                tarea += ". descripcion ";
+                tarea += temp.task.getDescripcion();
+                tarea += ". fecha anadida a la lista ";
+                tarea += temp.task.getAñadidaF().toString();
+                tarea += ". prioridad de la tarea ";
+                tarea += temp.task.getPrioridad();
+                tarea += ". fecha vencimiento de la tarea ";
+                tarea += temp.task.getVenceF().toString();
+                tarea += ". posicion en la lista ";
+                tarea += temp.task.getPosicion();
+                resultado += ("tarea " + temp.task.getPosicion() + " posicion en lista= " + (x + 1) + " : " + tarea + "}, ");
+                System.out.println(resultado);
+                tarea = "{";
+                if (temp.getNext() != null) {
+                    temp = temp.getNext();
+                }
+            }
+            return resultado;
+        } else {
             System.out.println("lista vacia");
-       
-        return resultado;
-         }
+
+            return resultado;
+        }
     }
     /**
      * Método de ordenamiento para la lista enlazada utilizando Quicksort

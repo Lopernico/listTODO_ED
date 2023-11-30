@@ -14,10 +14,10 @@ public class Task implements Comparable<Task> {
     // ATRIBUTOS
  
     public Task siguiente;
-    public int prioridad,posicion;
+    public int prioridad, posicion;
     public Date venceF;
     public LocalDateTime añadidaF ;
-    public String descripcion,titulo;
+    public String descripcion, titulo;
     public boolean done;
 
    // CONSTRUCTORES
