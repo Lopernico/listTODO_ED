@@ -8,8 +8,9 @@ package Functions;
  * @version IDE 17
  */
 public class LinkedList {
+
     // ATRIBUTOS
-    Node head=null;
+    Node head = null;
     public int size = 0;
     public boolean vacio = true;
 
@@ -43,6 +44,7 @@ public class LinkedList {
     // MÉTODOS
     /**
      * Método para añadir una tarea a la lista
+     *
      * @param task Tarea a añadir
      */
     public void addTask(Task task) {
@@ -52,7 +54,7 @@ public class LinkedList {
             vacio = false;
             size++;
             System.out.println("agregado");
-              display();
+            display();
         } else {
             Node current = head;
             while (current.next != null) {
@@ -62,11 +64,13 @@ public class LinkedList {
             display();
             current.next = newNode;
             vacio = false;
-                    size++;
+            size++;
         }
     }
+
     /**
      * Método para remover una tarea de la lista
+     *
      * @param task Tarea a remover
      */
     public void removeTask(Task task) {
@@ -79,19 +83,20 @@ public class LinkedList {
         if (current != null) {
             if (prev == null) {
                 head = current.next;
-            size--;
+                size--;
             } else {
                 prev.next = current.next;
-                 size--;
+                size--;
             }
         }
     }
-    
+
     /**
      * metodo que confirma si la lista se encuentra vacio
+     *
      * @return false si contiene elementos.
      */
-     public boolean empty() {
+    public boolean empty() {
         if (head == null) {
             vacio = true;
             return true;
@@ -100,39 +105,26 @@ public class LinkedList {
             return false;
         }
     }
-    
-     
-     /**
-      * busca una tarea en la lista segun la posicion que se indique
-      * @param posicion posicion de la tarea en la lista
-      * @return tarea con la posicion correspondiente
-      */
-      public Task buscarPorPosicion(int posicion) {
-          Node temp;
-          temp = head;
-          for (int x = 0; x <= size; x++) {
-              if (temp.task.getPosicion() != posicion) {
-                  temp = temp.getNext();
-              } else {
-                  return temp.task;
-              }
-          }
-          return null;
+
+    /**
+     * busca una tarea en la lista segun la posicion que se indique
+     *
+     * @param posicion posicion de la tarea en la lista
+     * @return tarea con la posicion correspondiente
+     */
+    public Task buscarPorPosicion(int posicion) {
+        Node temp;
+        temp = head;
+        for (int x = 0; x <= size; x++) {
+            if (temp.task.getPosicion() != posicion) {
+                temp = temp.getNext();
+            } else {
+                return temp.task;
+            }
+        }
+        return null;
     }
-      
-    public Task buscarPorPrioridad(int prioridad) {
-          Node temp;
-          temp = head;
-          for (int x = 0; x <= size; x++) {
-              if (temp.task.getPrioridad() != prioridad) {
-                  temp = temp.getNext();
-              } else {
-                  return temp.task;
-              }
-          }
-          return null;
-    }
-    
+
     /**
      * Método para mostrar la lista con todas las tareas que contiene
      */
@@ -152,15 +144,15 @@ public class LinkedList {
                 tarea += temp.task.getPrioridad();
                 tarea += ". fecha vencimiento de la tarea ";
                 tarea += temp.task.getVenceF().toString();
-                tarea += ". posicion en la lista ";
-                tarea += temp.task.getPosicion();
-                resultado += ("tarea " + temp.task.getPosicion() + " posicion en lista= " + (x + 1) + " : " + tarea + "}, ");
-                System.out.println(resultado);
+
+                resultado += ("tarea " + temp.task.getPosicion() + " : " + tarea + "}, ");
+
                 tarea = "{";
                 if (temp.getNext() != null) {
                     temp = temp.getNext();
                 }
             }
+            System.out.println(resultado);
             return resultado;
         } else {
             System.out.println("lista vacia");
@@ -168,23 +160,27 @@ public class LinkedList {
             return resultado;
         }
     }
+
     /**
      * Método de ordenamiento para la lista enlazada utilizando Quicksort
      */
     public void quickSort() {
         head = quickSortRec(head);
+        System.out.println("lista ordenada");
         display();
     }
+
     /**
      * Método auxiliar para Quicksort
+     *
      * @param node
-     * @return 
+     * @return
      */
     private Node quickSortRec(Node node) {
         if (node == null || node.next == null) {
-             display();
+     
             return node;
-            
+
         }
         Task pivotTask = node.task;
         Node less = null;
@@ -203,14 +199,16 @@ public class LinkedList {
         }
         less = quickSortRec(less);
         greater = quickSortRec(greater);
-         display();
+  
         return concatenate(less, equal, greater);
     }
+
     /**
      * Método auxiliar para agregar un elemento al final de una lista
+     *
      * @param list
      * @param data
-     * @return 
+     * @return
      */
     private Node addToEnd(Node list, Task data) {
         Node newNode = new Node(data);
@@ -224,12 +222,14 @@ public class LinkedList {
         current.next = newNode;
         return list;
     }
+
     /**
      * Método auxiliar para concatenar tres listas
+     *
      * @param less
      * @param equal
      * @param greater
-     * @return 
+     * @return
      */
     private Node concatenate(Node less, Node equal, Node greater) {
         Node result = less;
@@ -245,10 +245,12 @@ public class LinkedList {
         }
         return result;
     }
+
     /**
      * Método auxiliar para obtener la cola de una lista
+     *
      * @param list
-     * @return 
+     * @return
      */
     private Node getTail(Node list) {
         if (list == null) {
