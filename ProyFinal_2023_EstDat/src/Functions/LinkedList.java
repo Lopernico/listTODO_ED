@@ -159,6 +159,7 @@ for (int x = 0; x <= size; x++) {
      */
     public void quickSort() {
         head = quickSortRec(head);
+        display();
     }
     /**
      * Método auxiliar para Quicksort
@@ -167,7 +168,9 @@ for (int x = 0; x <= size; x++) {
      */
     private Node quickSortRec(Node node) {
         if (node == null || node.next == null) {
+             display();
             return node;
+            
         }
         Task pivotTask = node.task;
         Node less = null;
@@ -186,6 +189,7 @@ for (int x = 0; x <= size; x++) {
         }
         less = quickSortRec(less);
         greater = quickSortRec(greater);
+         display();
         return concatenate(less, equal, greater);
     }
     /**

@@ -79,9 +79,9 @@ public class TodoListGui extends JFrame {
         // Método que añade las tareas a la lista TODO
         JScrollPane scrollPane = new JScrollPane(taskList);
         scrollPane.setPreferredSize(new Dimension(300, 200));
-        JTextField prioridadField = new JTextField(5);
-        JTextField descripcionField = new JTextField(20);
-        JTextField tituloField = new JTextField(8);
+        JTextField prioridadField = new JTextField("prioridad",5);
+        JTextField descripcionField = new JTextField("descripcion",20);
+        JTextField tituloField = new JTextField("titulo",8);
         JButton addTaskButton = new JButton("Add Task");
       
 //logica boton agregar tarea a la lista
@@ -115,6 +115,9 @@ public class TodoListGui extends JFrame {
                 listModel.remove(selectedIndex);
             }
         });
+        
+        
+        
         // Método para mezclar la lista con el algoritmo quicksort
         JButton sortButton = new JButton("Sort");
         sortButton.addActionListener((ActionEvent e) -> {
@@ -295,17 +298,17 @@ public class TodoListGui extends JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(344, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(381, Short.MAX_VALUE)
                 .addComponent(selectorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(301, 301, 301))
+                .addGap(264, 264, 264))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(190, Short.MAX_VALUE)
+                .addContainerGap(235, Short.MAX_VALUE)
                 .addComponent(selectorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+                .addGap(57, 57, 57))
         );
 
         pack();
