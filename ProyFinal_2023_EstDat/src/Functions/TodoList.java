@@ -36,6 +36,12 @@ public class TodoList {
         linkedList.removeTask(task);
     }
     /**
+     * metodos para actualizar o reordenar tareas segun el criterio especificado
+     */
+    public void actualizarX(){
+        
+    }
+    /**
      * Método que muestra la lista TODO con todas sus tareas
      */
     public void display() {

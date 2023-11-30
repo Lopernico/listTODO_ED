@@ -12,6 +12,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.DefaultListModel;
 import javax.swing.DropMode;
@@ -26,6 +27,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.TransferHandler;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.*;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -41,12 +45,19 @@ public class TodoListGui extends JFrame {
      * Constructor que inicializa los paneles de la clase
      */
     public TodoListGui() {
+          
         todoList = new TodoList();
         listModel = new DefaultListModel<>();
         JList<Task> taskList = new JList<>(listModel);
         taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         taskList.setTransferHandler(new TaskTransferHandler());
         taskList.setDropMode(DropMode.INSERT);
+        
+        
+        
+        
+        
+        
         // Método para cambiar el nombre de la tarea haciendo doble click
         taskList.addMouseListener(new MouseAdapter() {
             @Override
@@ -55,28 +66,45 @@ public class TodoListGui extends JFrame {
                     int selectedIndex = taskList.getSelectedIndex();
                     if (selectedIndex != -1) {
                         Task selectedTask = listModel.get(selectedIndex);
-                        String newTaskName = JOptionPane.showInputDialog("Edit Task", selectedTask.name);
+                        String newTaskName = JOptionPane.showInputDialog("Edit Task", selectedTask.titulo);
                         if (newTaskName != null) {
-                            selectedTask.name = newTaskName;
+                            selectedTask.titulo = newTaskName;
                         }
                     }
                 }
             }
         });
+        
+        
         // Método que añade las tareas a la lista TODO
         JScrollPane scrollPane = new JScrollPane(taskList);
         scrollPane.setPreferredSize(new Dimension(300, 200));
-        JTextField newTaskField = new JTextField(20);
+        JTextField prioridadField = new JTextField(5);
+        JTextField descripcionField = new JTextField(20);
+        JTextField tituloField = new JTextField(8);
         JButton addTaskButton = new JButton("Add Task");
+      
+//logica boton agregar tarea a la lista
         addTaskButton.addActionListener((ActionEvent e) -> {
-            String taskName = newTaskField.getText().trim();
-            if (!taskName.isEmpty()) {
-                Task newTask = new Task(taskName, new Date(), 0);
+            String pri = prioridadField.getText().trim();
+            int prioridad = Integer.parseInt(pri);
+            Date venceF=selectorFecha.getDate();
+            String titulo = tituloField.getText().trim();
+            String descripcion = descripcionField.getText().trim();
+          //  Date venceF = (Date) datePicker.getModel().getValue();
+            
+            if (!titulo.isEmpty()) {
+                Task newTask = new Task(prioridad,todoList.linkedList.size+1,venceF,descripcion,titulo);
                 todoList.addTask(newTask);
                 listModel.addElement(newTask);
-                newTaskField.setText("");
+                prioridadField.setText("");
+                descripcionField.setText("");
+                tituloField.setText("");
             }
         });
+        
+        
+        
         // Método para eliminar las tareas de la lista
         JButton removeTaskButton = new JButton("Remove Task");
         removeTaskButton.addActionListener((ActionEvent e) -> {
@@ -94,7 +122,9 @@ public class TodoListGui extends JFrame {
         });
         JPanel panel = new JPanel();
         panel.add(scrollPane);
-        panel.add(newTaskField);
+        panel.add(tituloField);
+        panel.add(descripcionField);
+        panel.add(prioridadField);
         panel.add(addTaskButton);
         panel.add(removeTaskButton);
         panel.add(sortButton);
@@ -104,6 +134,7 @@ public class TodoListGui extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+          initComponents();
     }
 
     // CLASES
@@ -256,22 +287,31 @@ public class TodoListGui extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        selectorFecha = new com.toedter.calendar.JCalendar();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(344, Short.MAX_VALUE)
+                .addComponent(selectorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(301, 301, 301))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(190, Short.MAX_VALUE)
+                .addComponent(selectorFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(102, 102, 102))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar selectorFecha;
     // End of variables declaration//GEN-END:variables
 }
